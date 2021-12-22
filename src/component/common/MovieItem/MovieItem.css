@@ -1,0 +1,44 @@
+.movie-card-block {
+  width: calc(100% - 2 * .25rem);
+  margin: .25rem;
+}
+
+@media (min-width: 450px) {
+  .movie-card-block{
+    width: calc(50% - 2 * .25rem);
+  }
+}
+@media (min-width: 600px) {
+  .movie-card-block{
+    width: calc(33.333% - 2 * .25rem);
+  }
+}
+@media (min-width: 750px) {
+  .movie-card-block{
+    width: calc(25% - 2 * .25rem);
+  }
+}
+
+@media (min-width: 900px) {
+  .movie-card-block{
+    width: calc(20% - 2 * .25rem);
+  }
+}
+
+@media (min-width: 1050px) {
+  .movie-card-block{
+      width: calc(16.666% - 2 * .25rem);
+  }
+}
+
+@media (min-width: 1200px) {
+  .movie-card-block{
+    width: calc(14.285% - 2 * .25rem);
+  }
+}
+
+@media (min-width: 1350px) {
+  .movie-card-block{
+    width: calc(12.5% - 2 * .25rem);
+  }
+}
