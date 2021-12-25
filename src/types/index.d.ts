@@ -1,21 +1,17 @@
-// export interface TMovie {
-//   dates?: object
-//   page?: number
-//   results?: object[]
-//   total_pages?: number
-//   total_results?: number
-// }
+export interface MovieState {
+  data: BillboardResponse
+  loading: boolean;
+  latestDoc: Movie | string;
+  movies: Movie[];
+  stop: number;
 
+}
 export interface BillboardResponse {
   dates: Dates;
   page: number;
   results: Movie[];
   total_pages: number;
   total_results: number;
-
-  loading: boolean;
-  latestDoc: Movie | string;
-  stop: number;
 }
 
 export interface Dates {

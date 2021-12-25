@@ -4,7 +4,7 @@ import movieApi from '../utils/baseApi';
 
 export let latestDoc:any = '';
 
-export const getNowPlayings = async (page:number = 1) => {
+export const getNowPlayings = async (page:number) => {
   try {
     const { data } = await movieApi.get<BillboardResponse>(`movie/now_playing?api_key=${APIKey}&language=en-US&page=${page}`);
 

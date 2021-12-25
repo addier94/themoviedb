@@ -6,11 +6,12 @@ import { useDispatch } from 'react-redux';
 
 const Home = () => {
   const movie = appSelector((state) => state.movie);
+  const { data: { page, total_pages }, latestDoc } = movie;
 
   const dispatch = useDispatch();
   useEffect(() => {
-    const page = movie.page + 1;
-    const payload = { page, doc: movie.latestDoc };
+    const numPage = (page < total_pages) ? page + 1 : page;
+    const payload = { page: numPage, doc: latestDoc };
     dispatch(movieFetchData(payload));
   }, [dispatch, movie.latestDoc]);
 

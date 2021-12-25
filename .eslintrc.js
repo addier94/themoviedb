@@ -36,5 +36,6 @@ module.exports = {
     'no-unused-vars': 'off',
     'consistent-return': 'off',
     'import/no-mutable-exports': 'off',
+    camelcase: 'off',
   },
 };

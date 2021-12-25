@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getNowPlayings } from 'action/nowPlayingAction';
-import { BillboardResponse, Movie } from 'types';
+import {
+  BillboardResponse, Movie, MovieState,
+} from 'types';
 
 export const movieFetchData = createAsyncThunk(
   'movies/nowPlayingsFetch',
@@ -11,28 +13,21 @@ export const movieFetchData = createAsyncThunk(
     return { resp, doc };
   },
 );
-
-// export interface MovieState {
-//   data: BillboardResponse,
-//   loading: boolean,
-//   stop: number
-// }
-
-// export const initSubState = {
-
-// };
-
-const initialState: BillboardResponse = {
+const initRestData = {
   dates: {
     maximum: '',
     minimum: '',
   },
-  page: 0,
+  page: 1,
   results: [],
   total_pages: 0,
   total_results: 0,
+};
 
+const initialState: MovieState = {
+  data: initRestData,
   loading: false,
+  movies: [],
   latestDoc: '',
   stop: 0,
 };
@@ -52,13 +47,11 @@ const movieSlice = createSlice({
       })
       .addCase(movieFetchData.fulfilled, (state, action) => {
         if (action.payload.doc) {
-          state.results = [...state.results, ...action.payload.resp.results];
-          state.page = action.payload.resp.page;
+          state.data = action.payload.resp;
+          state.movies = [...state.movies, ...action.payload.resp.results];
         } else {
-          state.page = action.payload.resp.page;
-          state.results = action.payload.resp.results;
-          state.total_pages = action.payload.resp.total_pages;
-          state.total_results = action.payload.resp.total_results;
+          state.data = action.payload.resp;
+          state.movies = action.payload.resp.results;
         }
         state.stop = action.payload.resp.results.length;
         state.loading = false;
