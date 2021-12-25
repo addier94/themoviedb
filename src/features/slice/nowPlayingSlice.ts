@@ -1,13 +1,14 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getNowPlayings } from 'action/nowPlayingAction';
-import { BillboardResponse } from 'types';
+import { BillboardResponse, Movie } from 'types';
 
 export const movieFetchData = createAsyncThunk(
   'movies/nowPlayingsFetch',
-  async () => {
-    const response = await getNowPlayings();
+  async (payload: {page:number, doc:Movie|string}) => {
+    const { page, doc } = payload;
+    const resp = await getNowPlayings(page) as BillboardResponse;
 
-    return response;
+    return { resp, doc };
   },
 );
 
@@ -32,8 +33,8 @@ const initialState: BillboardResponse = {
   total_results: 0,
 
   loading: false,
-  pagination: '',
-  stop: 1,
+  latestDoc: '',
+  stop: 0,
 };
 
 const movieSlice = createSlice({
@@ -41,7 +42,7 @@ const movieSlice = createSlice({
   initialState,
   reducers: {
     paginate: (state, action) => {
-      state.pagination = action.payload;
+      state.latestDoc = action.payload.latestDoc;
     },
   },
   extraReducers: (builder) => {
@@ -50,14 +51,16 @@ const movieSlice = createSlice({
         state.loading = true;
       })
       .addCase(movieFetchData.fulfilled, (state, action) => {
-        if (action.payload.pagination) {
-          state.results = [...state.results, ...action.payload.results];
+        if (action.payload.doc) {
+          state.results = [...state.results, ...action.payload.resp.results];
+          state.page = action.payload.resp.page;
         } else {
-          state.page = action.payload.page;
-          state.results = action.payload.results;
-          state.total_pages = action.payload.total_pages;
-          state.total_results = action.payload.total_results;
+          state.page = action.payload.resp.page;
+          state.results = action.payload.resp.results;
+          state.total_pages = action.payload.resp.total_pages;
+          state.total_results = action.payload.resp.total_results;
         }
+        state.stop = action.payload.resp.results.length;
         state.loading = false;
       });
   },

@@ -14,7 +14,7 @@ export interface BillboardResponse {
   total_results: number;
 
   loading: boolean;
-  pagination: string;
+  latestDoc: Movie | string;
   stop: number;
 }
 

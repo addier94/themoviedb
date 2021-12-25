@@ -35,5 +35,6 @@ module.exports = {
     'no-shadow': 'off',
     'no-unused-vars': 'off',
     'consistent-return': 'off',
+    'import/no-mutable-exports': 'off',
   },
 };

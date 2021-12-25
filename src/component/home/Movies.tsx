@@ -12,13 +12,11 @@ const Movies = () => {
 
   const handleLoadMore = useCallback(() => {
     if (stop === 0) return;
-    console.log('latestDoc ', latestDoc);
-    dispatch(paginate({ doc: latestDoc }));
+    dispatch(paginate({ latestDoc }));
   }, [stop, dispatch]);
 
   useEffect(() => {
     const btn = loadRef.current;
-
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         handleLoadMore();
