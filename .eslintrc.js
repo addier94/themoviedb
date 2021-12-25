@@ -34,5 +34,6 @@ module.exports = {
     'no-use-before-define': 'off',
     'no-shadow': 'off',
     'no-unused-vars': 'off',
+    'consistent-return': 'off',
   },
 };

@@ -1,5 +1,5 @@
 import Movies from 'component/home/Movies';
-import { movieFetchData } from 'features/slice/movieSlice';
+import { movieFetchData } from 'features/slice/nowPlayingSlice';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 

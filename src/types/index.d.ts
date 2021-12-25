@@ -12,6 +12,10 @@ export interface BillboardResponse {
   results: Movie[];
   total_pages: number;
   total_results: number;
+
+  loading: boolean;
+  pagination: string;
+  stop: number;
 }
 
 export interface Dates {
