@@ -2,21 +2,33 @@ import { GoThreeBars } from 'react-icons/go';
 import { RiMovie2Fill } from 'react-icons/ri';
 import { FaRegUser } from 'react-icons/fa';
 import { GrFormSearch } from 'react-icons/gr';
+import './Navbar.css';
 
 const Navbar = () => (
-  <div className="bg-gray2-main text-white p-4 lg:p-2">
+  <header className="bg-gray2-main text-white p-4 lg:p-2" id="navigation">
     <div className="lg:flex items-center justify-between max-w-screen-2xl mx-auto">
-      <nav className="flex justify-between">
+      <nav className="flex justify-between items-center">
         <GoThreeBars className="w-6 h-6 lg:hidden" />
         <RiMovie2Fill className="w-6 h-6" />
         <FaRegUser className="w-6 h-6 lg:hidden" />
-        <ul className="hidden lg:flex ml-8">
-          <li className="mr-6"><a href="/">Home</a></li>
-          <li className="mr-6"><a href="/">Genre</a></li>
-          <li className="mr-6"><a href="/">Country</a></li>
-          <li className="mr-6"><a href="/">Movies</a></li>
-          <li className="mr-6"><a href="/">TV Shows</a></li>
-          <li className="mr-6"><a href="/">Top IMBD</a></li>
+        <ul className="nav__list">
+          <li className=" nav__listitem">
+            Home
+            <ul className="nav__listitemdrop">
+              <li>Our Team</li>
+              <li>Our Team</li>
+              <li>Our Team</li>
+            </ul>
+          </li>
+          <li className=" nav__listitem">
+            Genre
+            <ul className="nav__listitemdrop">
+              <li>Portfolio</li>
+              <li>Portfolio</li>
+            </ul>
+          </li>
+          <li className="nav__listitem"><a href="/">Country</a></li>
+          <li className="nav__listitem"><a href="/">Movies</a></li>
         </ul>
       </nav>
       <article className="lg:flex items-center ">
@@ -30,7 +42,7 @@ const Navbar = () => (
         </a>
       </article>
     </div>
-  </div>
+  </header>
 );
 
 export default Navbar;

@@ -13,7 +13,7 @@ const Home = () => {
     const numPage = (page < total_pages) ? page + 1 : page;
     const payload = { page: numPage, doc: latestDoc };
     dispatch(movieFetchData(payload));
-  }, [dispatch, movie.latestDoc]);
+  }, [dispatch, latestDoc]);
 
   return (
     <div>

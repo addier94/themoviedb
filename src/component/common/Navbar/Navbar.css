@@ -1,0 +1,38 @@
+.nav__list {
+  @apply hidden lg:flex mx-4 gap-8 px-4;
+}
+.nav__list .nav__listitem {
+  @apply relative cursor-pointer py-3;
+}
+
+.nav__list .nav__listitem::after {
+  @apply w-0 absolute left-0 bg-yellow-main cursor-pointer bottom-2 rounded-2xl h-1;
+  content: "";
+  transition: width 200ms ease-in;
+}
+
+.nav__list .nav__listitem:hover::after,
+.nav__list .nav__listitem:focus::after {
+  width: 100%;
+}
+
+.nav__list .nav__listitem:hover ul,
+.nav__list .nav__listitem:focus ul {
+  @apply opacity-100 visible;
+}
+
+.nav__list .nav__listitem .nav__listitemdrop{
+  @apply absolute top-12 -left-4 bg-black w-48 p-4 flex flex-col gap-2 opacity-0 rounded-xl; 
+  box-shadow: 0 0 10px black;
+  visibility: hidden;
+  transition: opacity 200ms ease-in-out;
+}
+
+.nav__list .nav__listitem .nav__listitemdrop li {
+  @apply py-2 px-4 rounded-lg;
+  transition: background-color 200ms ease-in-out;
+}
+.nav__list .nav__listitem .nav__listitemdrop li:hover,
+.nav__list .nav__listitem .nav__listitemdrop:focus {
+  @apply bg-yellow-600;
+}
