@@ -6,9 +6,9 @@ import {
 
 export const movieFetchData = createAsyncThunk(
   'movies/nowPlayingsFetch',
-  async (payload: {page:number, doc:Movie|string}) => {
-    const { page, doc } = payload;
-    const resp = await getNowPlayings(page) as BillboardResponse;
+  async (payload: {page:number, doc:Movie|string, tag:string}) => {
+    const { page, doc, tag } = payload;
+    const resp = await getNowPlayings(page, tag) as BillboardResponse;
 
     return { resp, doc };
   },
@@ -39,6 +39,12 @@ const movieSlice = createSlice({
     paginate: (state, action) => {
       state.latestDoc = action.payload.latestDoc;
     },
+    resetMovie: (state) => {
+      state.data = initRestData;
+      state.movies = [];
+      state.latestDoc = '';
+      state.stop = 0;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -59,5 +65,5 @@ const movieSlice = createSlice({
   },
 });
 
-export const { paginate } = movieSlice.actions;
+export const { paginate, resetMovie } = movieSlice.actions;
 export default movieSlice.reducer;

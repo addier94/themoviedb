@@ -4,7 +4,7 @@ import { movieFetchData, resetMovie } from 'features/slice/nowPlayingSlice';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-const Home = () => {
+const Upcoming = () => {
   const movie = appSelector((state) => state.movie);
   const { data: { page, total_pages }, latestDoc } = movie;
 
@@ -16,10 +16,9 @@ const Home = () => {
 
   useEffect(() => {
     const numPage = (page < total_pages) ? page + 1 : page;
-    const payload = { page: numPage, doc: latestDoc, tag: 'now_playing' };
+    const payload = { page: numPage, doc: latestDoc, tag: 'upcoming' };
     dispatch(movieFetchData(payload));
   }, [dispatch, latestDoc]);
-
   return (
     <div>
       <Movies />
@@ -27,4 +26,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Upcoming;
