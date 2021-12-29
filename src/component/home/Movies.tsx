@@ -1,5 +1,5 @@
 import { latestDoc } from 'action/nowPlayingAction';
-import { BigLoading, MovieItem, MovieStateTitle } from 'component/common';
+import { BigLoading, MovieItem } from 'component/common';
 import { appSelector } from 'features/hooks';
 import { paginate } from 'features/slice/nowPlayingSlice';
 import { useCallback, useEffect, useRef } from 'react';
@@ -31,8 +31,7 @@ const Movies = () => {
   }, [handleLoadMore]);
 
   return (
-    <div>
-      <MovieStateTitle title="Now playing" />
+    <>
       {loading && <BigLoading />}
       <div className="flex flex-wrap items-start">
         {movies && movies.map((item) => (
@@ -48,7 +47,7 @@ const Movies = () => {
       >
         Load more
       </button>
-    </div>
+    </>
   );
 };
 

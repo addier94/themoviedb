@@ -10,7 +10,7 @@ export const movieFetchData = createAsyncThunk(
     const { page, doc, tag } = payload;
     const resp = await getNowPlayings(page, tag) as BillboardResponse;
 
-    return { resp, doc };
+    return { resp, doc, tag };
   },
 );
 const initRestData = {
@@ -30,6 +30,8 @@ const initialState: MovieState = {
   movies: [],
   latestDoc: '',
   stop: 0,
+  tag: 'now_playing',
+  selectMovie: {},
 };
 
 const movieSlice = createSlice({
@@ -52,12 +54,14 @@ const movieSlice = createSlice({
         state.loading = true;
       })
       .addCase(movieFetchData.fulfilled, (state, action) => {
-        if (action.payload.doc) {
+        if (state.tag === action.payload.tag) {
           state.data = action.payload.resp;
           state.movies = [...state.movies, ...action.payload.resp.results];
         } else {
           state.data = action.payload.resp;
           state.movies = action.payload.resp.results;
+          state.tag = action.payload.tag;
+          state.stop = 0;
         }
         state.stop = action.payload.resp.results.length;
         state.loading = false;

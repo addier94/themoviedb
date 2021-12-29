@@ -4,6 +4,8 @@ export interface MovieState {
   latestDoc: Movie | string;
   movies: Movie[];
   stop: number;
+  tag: string;
+  selectMovie: object
 
 }
 export interface BillboardResponse {

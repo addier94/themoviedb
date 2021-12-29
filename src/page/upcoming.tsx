@@ -1,3 +1,4 @@
+import { MovieStateTitle } from 'component/common';
 import Movies from 'component/home/Movies';
 import { appSelector } from 'features/hooks';
 import { movieFetchData, resetMovie } from 'features/slice/nowPlayingSlice';
@@ -6,23 +7,23 @@ import { useDispatch } from 'react-redux';
 
 const Upcoming = () => {
   const movie = appSelector((state) => state.movie);
-  const { data: { page, total_pages }, latestDoc } = movie;
+  const { data: { page, total_pages }, latestDoc, tag } = movie;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(resetMovie());
-  }, []);
-
-  useEffect(() => {
-    const numPage = (page < total_pages) ? page + 1 : page;
+    let numPage: number = 1;
+    if (tag === 'upcoming') {
+      numPage = (page < total_pages) ? page + 1 : page;
+    }
     const payload = { page: numPage, doc: latestDoc, tag: 'upcoming' };
     dispatch(movieFetchData(payload));
   }, [dispatch, latestDoc]);
   return (
-    <div>
+    <>
+      <MovieStateTitle title="List of upcoming" />
       <Movies />
-    </div>
+    </>
   );
 };
 

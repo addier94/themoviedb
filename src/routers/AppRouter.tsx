@@ -3,6 +3,7 @@ import Home from 'page';
 import Upcoming from 'page/upcoming';
 import Popular from 'page/popular';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import TopRated from 'page/TopRated';
 
 const AppRouter = () => (
   <BrowserRouter>
@@ -33,7 +34,18 @@ const AppRouter = () => (
           </MainLayout>
         )}
       />
+
+      <Route
+        path="/top-related"
+        element={(
+          <MainLayout>
+            <TopRated />
+          </MainLayout>
+        )}
+      />
+
     </Routes>
+
   </BrowserRouter>
 );
 

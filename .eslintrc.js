@@ -37,5 +37,6 @@ module.exports = {
     'consistent-return': 'off',
     'import/no-mutable-exports': 'off',
     camelcase: 'off',
+    'no-debugger': 'off',
   },
 };
