@@ -3,6 +3,9 @@ import { getNowPlayings } from 'action/nowPlayingAction';
 import {
   BillboardResponse, Movie, MovieState,
 } from 'types';
+import { SingleMovie } from 'types/SingleMovie';
+import { APIKey } from 'utils/movieApiKey';
+import movieApi from '../../utils/baseApi';
 
 export const movieFetchData = createAsyncThunk(
   'movies/nowPlayingsFetch',
@@ -13,25 +16,33 @@ export const movieFetchData = createAsyncThunk(
     return { resp, doc, tag };
   },
 );
-const initRestData = {
-  dates: {
-    maximum: '',
-    minimum: '',
+
+export const fetchAsyncMovieDetail = createAsyncThunk(
+  'movies/fetchAsyncMovieDetail',
+  async (id: string) => {
+    const response = await movieApi.get(`movie/${id}?api_key=${APIKey}&language=en-US`);
+    return response.data as SingleMovie;
   },
-  page: 1,
-  results: [],
-  total_pages: 0,
-  total_results: 0,
-};
+);
+// const initRestData = {
+//   dates: {
+//     maximum: '',
+//     minimum: '',
+//   },
+//   page: 1,
+//   results: [],
+//   total_pages: 0,
+//   total_results: 0,
+// };
 
 const initialState: MovieState = {
-  data: initRestData,
+  data: {} as BillboardResponse,
   loading: false,
   movies: [],
   latestDoc: '',
   stop: 0,
   tag: 'now_playing',
-  selectMovie: {},
+  selectMovie: {} as SingleMovie,
 };
 
 const movieSlice = createSlice({
@@ -41,12 +52,12 @@ const movieSlice = createSlice({
     paginate: (state, action) => {
       state.latestDoc = action.payload.latestDoc;
     },
-    resetMovie: (state) => {
-      state.data = initRestData;
-      state.movies = [];
-      state.latestDoc = '';
-      state.stop = 0;
-    },
+    // resetMovie: (state) => {
+    //   state.data = initRestData;
+    //   state.movies = [];
+    //   state.latestDoc = '';
+    //   state.stop = 0;
+    // },
   },
   extraReducers: (builder) => {
     builder
@@ -65,9 +76,16 @@ const movieSlice = createSlice({
         }
         state.stop = action.payload.resp.results.length;
         state.loading = false;
+      })
+      .addCase(fetchAsyncMovieDetail.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchAsyncMovieDetail.fulfilled, (state, action) => {
+        state.selectMovie = action.payload;
+        state.loading = false;
       });
   },
 });
 
-export const { paginate, resetMovie } = movieSlice.actions;
+export const { paginate } = movieSlice.actions;
 export default movieSlice.reducer;

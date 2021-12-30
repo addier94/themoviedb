@@ -1,3 +1,5 @@
+import { SingleMovie } from './SingleMovie';
+
 export interface MovieState {
   data: BillboardResponse
   loading: boolean;
@@ -5,8 +7,7 @@ export interface MovieState {
   movies: Movie[];
   stop: number;
   tag: string;
-  selectMovie: object
-
+  selectMovie: SingleMovie
 }
 export interface BillboardResponse {
   dates: Dates;

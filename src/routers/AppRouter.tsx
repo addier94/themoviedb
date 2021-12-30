@@ -4,6 +4,7 @@ import Upcoming from 'page/upcoming';
 import Popular from 'page/popular';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import TopRated from 'page/TopRated';
+import MovieById from 'page/movie/MovieById';
 
 const AppRouter = () => (
   <BrowserRouter>
@@ -40,6 +41,15 @@ const AppRouter = () => (
         element={(
           <MainLayout>
             <TopRated />
+          </MainLayout>
+        )}
+      />
+
+      <Route
+        path="/movie/:movieId"
+        element={(
+          <MainLayout>
+            <MovieById />
           </MainLayout>
         )}
       />

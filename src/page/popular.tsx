@@ -1,7 +1,7 @@
 import { MovieStateTitle } from 'component/common';
 import Movies from 'component/home/Movies';
 import { appSelector } from 'features/hooks';
-import { movieFetchData, resetMovie } from 'features/slice/nowPlayingSlice';
+import { movieFetchData } from 'features/slice/nowPlayingSlice';
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 

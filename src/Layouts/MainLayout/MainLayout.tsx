@@ -8,7 +8,7 @@ interface Props {
 const MainLayout: FC<Props> = ({ children }) => (
   <>
     <Navbar />
-    <main className="min-h-[calc(100vh-12rem)] lg:min-h-[calc(100vh-5rem)] text-white p-4 max-w-screen-2xl mx-auto">
+    <main className="min-h-[calc(100vh-12rem)] lg:min-h-[calc(100vh-5rem)] text-white p-4 max-w-screen-2xl mx-auto pt-24">
       {children}
     </main>
     <Footer />
