@@ -4,7 +4,7 @@ export const convertToHours = (hour:number | null) => {
   if (hour) {
     const hours = Math.floor(hour / 60);
     const minute = Math.floor(hour % 60);
-    return `${hours}:${minute}`;
+    return `${hours}h ${minute}m`;
   }
   return '';
 };

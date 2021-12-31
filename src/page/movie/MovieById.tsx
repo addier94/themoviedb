@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 const MovieById = () => {
   const { movieId } = useParams();
   const dispatch = useDispatch();
-  const { loading, selectMovie } = appSelector((state) => state.movie);
+  const { loading } = appSelector((state) => state.movie);
 
   useEffect(() => {
     if (movieId) dispatch(fetchAsyncMovieDetail(movieId));
@@ -18,8 +18,7 @@ const MovieById = () => {
     <>
       {loading && <BigLoading />}
 
-      {/* If resources for SingleMovie exists */}
-      {selectMovie.id && <SingleMovie />}
+      <SingleMovie />
     </>
   );
 };

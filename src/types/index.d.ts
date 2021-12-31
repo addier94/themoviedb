@@ -1,4 +1,4 @@
-import { SingleMovie } from './SingleMovie';
+import { allEndpointForMovieDetail, ExternalIDS } from './SingleMovie';
 
 export interface MovieState {
   data: BillboardResponse
@@ -7,7 +7,7 @@ export interface MovieState {
   movies: Movie[];
   stop: number;
   tag: string;
-  selectMovie: SingleMovie
+  selectMovie: allEndpointForMovieDetail
 }
 export interface BillboardResponse {
   dates: Dates;

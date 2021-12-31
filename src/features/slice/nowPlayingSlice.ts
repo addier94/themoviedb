@@ -1,11 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getNowPlayings } from 'action/nowPlayingAction';
+import { getNowPlayings, getSingleMovieDetail } from 'action/nowPlayingAction';
 import {
   BillboardResponse, Movie, MovieState,
 } from 'types';
-import { SingleMovie } from 'types/SingleMovie';
-import { APIKey } from 'utils/movieApiKey';
-import movieApi from '../../utils/baseApi';
+import { allEndpointForMovieDetail, ExternalIDS } from 'types/SingleMovie';
 
 export const movieFetchData = createAsyncThunk(
   'movies/nowPlayingsFetch',
@@ -20,20 +18,18 @@ export const movieFetchData = createAsyncThunk(
 export const fetchAsyncMovieDetail = createAsyncThunk(
   'movies/fetchAsyncMovieDetail',
   async (id: string) => {
-    const response = await movieApi.get(`movie/${id}?api_key=${APIKey}&language=en-US`);
-    return response.data as SingleMovie;
+    const res = await getSingleMovieDetail(id) as allEndpointForMovieDetail;
+    return res;
   },
 );
-// const initRestData = {
-//   dates: {
-//     maximum: '',
-//     minimum: '',
-//   },
-//   page: 1,
-//   results: [],
-//   total_pages: 0,
-//   total_results: 0,
-// };
+const initialDetailMovie = {
+  detail: {},
+  credit: {},
+  external_ids: {},
+  reviews: {},
+  videos: {},
+  recommendations: {},
+};
 
 const initialState: MovieState = {
   data: {} as BillboardResponse,
@@ -42,7 +38,7 @@ const initialState: MovieState = {
   latestDoc: '',
   stop: 0,
   tag: 'now_playing',
-  selectMovie: {} as SingleMovie,
+  selectMovie: initialDetailMovie as allEndpointForMovieDetail,
 };
 
 const movieSlice = createSlice({
@@ -52,12 +48,7 @@ const movieSlice = createSlice({
     paginate: (state, action) => {
       state.latestDoc = action.payload.latestDoc;
     },
-    // resetMovie: (state) => {
-    //   state.data = initRestData;
-    //   state.movies = [];
-    //   state.latestDoc = '';
-    //   state.stop = 0;
-    // },
+
   },
   extraReducers: (builder) => {
     builder
