@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux';
 import { convertToHours, getYear } from 'services/manageDate';
 import { ResultVideos } from 'types/SingleMovie';
 import { DEFAULT_IMAGE, PATH_IMAGE } from 'utils/imagePath';
+import { BsBookmarksFill, BsBookmarks, BsPlayFill } from 'react-icons/bs';
+import { MdFavoriteBorder, MdFavorite } from 'react-icons/md';
 
 const SingleMovie = () => {
   const dispatch = useDispatch();
@@ -28,7 +30,7 @@ const SingleMovie = () => {
   return (
     <section>
       <div className="flex justify-center">
-        <img onClick={() => dispatch(showModal())} src={poster_path ? PATH_IMAGE + poster_path : DEFAULT_IMAGE} alt={title} />
+        <img src={poster_path ? PATH_IMAGE + poster_path : DEFAULT_IMAGE} alt={title} />
       </div>
       <article className="mt-2">
         <h1 className="text-2xl font-bold">
@@ -39,7 +41,7 @@ const SingleMovie = () => {
             )
           </span>
         </h1>
-        <div className="flex justify-between py-2">
+        <article className="flex justify-between py-2">
           <span className="">
             {release_date}
           </span>
@@ -49,7 +51,25 @@ const SingleMovie = () => {
             ))}
           </span>
           <span>{convertToHours(runtime)}</span>
-        </div>
+        </article>
+        <article>
+          <div className="flex">
+            <div className="flex text-red-700 gap-4 mr-2">
+              <div className="flex bg-white-main rounded-full p-2 cursor-pointer">
+                {/* <MdFavoriteBorder className="w-6 h-6" /> */}
+                <MdFavorite className="w-6 h-6" />
+              </div>
+              <div className="flex bg-white-main rounded-full p-2 cursor-pointer">
+                {/* <BsBookmarksFill className="w-6 h-6 " /> */}
+                <BsBookmarks className="w-6 h-6" />
+              </div>
+            </div>
+            <button type="button" onClick={() => dispatch(showModal())} className="flex items-center duration-150 hover:opacity-80">
+              <BsPlayFill className="w-8 h-8" />
+              Play Trailer
+            </button>
+          </div>
+        </article>
         <div />
         {toggleModal && <Modal video={video} />}
         <div>
