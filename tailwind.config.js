@@ -28,6 +28,8 @@ module.exports = {
         'danger-main': 'var(--danger)',
         'light-main': 'var(--light)',
         'dark-main': 'var(--dark)',
+        'opacity8-main': 'var(--opacity8)',
+
       },
     },
   },

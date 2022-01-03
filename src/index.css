@@ -6,6 +6,7 @@ body{
   background: #000;
 }
 :root {
+  --opacity8: rgba(0,0,0,0.8);
   --gray4: #555;
   --gray3: #0f0f0f;
   --gray2: #121212;

@@ -1,22 +1,34 @@
+import { Modal } from 'component/common';
 import { appSelector } from 'features/hooks';
+import Ui, { showModal } from 'features/slice/Ui';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { convertToHours, getYear } from 'services/manageDate';
+import { ResultVideos } from 'types/SingleMovie';
 import { DEFAULT_IMAGE, PATH_IMAGE } from 'utils/imagePath';
 
 const SingleMovie = () => {
-  const { detail, credit } = appSelector((state) => state.movie.selectMovie);
+  const dispatch = useDispatch();
+
+  const { toggleModal } = appSelector((state) => state.ui);
+  const { detail, credit, videos } = appSelector((state) => state.movie.selectMovie);
 
   const {
-    backdrop_path, poster_path, title, release_date, genres, runtime, overview,
+    poster_path, title, release_date, genres, runtime, overview,
   } = detail;
+
+  const [video, setVideo] = useState<ResultVideos | undefined>(undefined);
+
+  useEffect(() => {
+    if (videos.id) {
+      setVideo(videos.results[0]);
+    }
+  }, [videos.id]);
 
   return (
     <section>
       <div className="flex justify-center">
-        {
-          backdrop_path
-            ? <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={title} />
-            : <img src="https://images.unsplash.com/photo-1609743522653-52354461eb27?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt={title} />
-        }
+        <img onClick={() => dispatch(showModal())} src={poster_path ? PATH_IMAGE + poster_path : DEFAULT_IMAGE} alt={title} />
       </div>
       <article className="mt-2">
         <h1 className="text-2xl font-bold">
@@ -38,6 +50,8 @@ const SingleMovie = () => {
           </span>
           <span>{convertToHours(runtime)}</span>
         </div>
+        <div />
+        {toggleModal && <Modal video={video} />}
         <div>
           <h6 className="text-2xl">Overview</h6>
           <p className="font-light">{overview}</p>

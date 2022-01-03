@@ -28,7 +28,7 @@ export const getSingleMovieDetail = async (id:string) => {
     ]);
 
     // resources for each endpoint like this {detail:{...}, credit:{...}, external_id:{...} }
-    const resources = ['detail', 'credit', 'external_id', 'reviews', 'videos', 'recommendations'];
+    const resources:string[] = ['detail', 'credit', 'external_id', 'reviews', 'videos', 'recommendations'];
     const data:any = {};
 
     resources.forEach((item, index) => { data[item] = res[index].data; });
