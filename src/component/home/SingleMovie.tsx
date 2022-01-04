@@ -1,12 +1,14 @@
-import { Modal } from 'component/common';
+import { Modal, RatingMovie } from 'component/common';
 import { appSelector } from 'features/hooks';
 import Ui, { showModal } from 'features/slice/Ui';
-import { useEffect, useState } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { convertToHours, getYear } from 'services/manageDate';
 import { ResultVideos } from 'types/SingleMovie';
 import { DEFAULT_IMAGE, PATH_IMAGE } from 'utils/imagePath';
-import { BsBookmarksFill, BsBookmarks, BsPlayFill } from 'react-icons/bs';
+import {
+  BsBookmarksFill, BsBookmarks, BsPlayFill, BsStarFill, BsStarHalf, BsStar,
+} from 'react-icons/bs';
 import { MdFavoriteBorder, MdFavorite } from 'react-icons/md';
 
 const SingleMovie = () => {
@@ -16,7 +18,7 @@ const SingleMovie = () => {
   const { detail, credit, videos } = appSelector((state) => state.movie.selectMovie);
 
   const {
-    poster_path, title, release_date, genres, runtime, overview,
+    poster_path, title, release_date, genres, runtime, overview, vote_average, vote_count,
   } = detail;
 
   const [video, setVideo] = useState<ResultVideos | undefined>(undefined);
@@ -52,7 +54,8 @@ const SingleMovie = () => {
           </span>
           <span>{convertToHours(runtime)}</span>
         </article>
-        <article>
+        <article className="flex justify-between">
+
           <div className="flex">
             <div className="flex text-red-700 gap-4 mr-2">
               <div className="flex bg-white-main rounded-full p-2 cursor-pointer">
@@ -64,11 +67,11 @@ const SingleMovie = () => {
                 <BsBookmarks className="w-6 h-6" />
               </div>
             </div>
-            <button type="button" onClick={() => dispatch(showModal())} className="flex items-center duration-150 hover:opacity-80">
-              <BsPlayFill className="w-8 h-8" />
-              Play Trailer
+            <button type="button" onClick={() => dispatch(showModal())} className="bg-yellow-main rounded-md duration-150 hover:opacity-80">
+              <BsPlayFill className="w-10 h-10" />
             </button>
           </div>
+          <RatingMovie vote_average={vote_average} vote_count={vote_count} />
         </article>
         <div />
         {toggleModal && <Modal video={video} />}
