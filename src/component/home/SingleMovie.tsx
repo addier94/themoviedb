@@ -1,15 +1,13 @@
 import { Modal, RatingMovie } from 'component/common';
 import { appSelector } from 'features/hooks';
-import Ui, { showModal } from 'features/slice/Ui';
-import { PropsWithChildren, useEffect, useState } from 'react';
+import { showModal } from 'features/slice/Ui';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { convertToHours, getYear } from 'services/manageDate';
 import { ResultVideos } from 'types/SingleMovie';
 import { DEFAULT_IMAGE, PATH_IMAGE } from 'utils/imagePath';
-import {
-  BsBookmarksFill, BsBookmarks, BsPlayFill, BsStarFill, BsStarHalf, BsStar,
-} from 'react-icons/bs';
-import { MdFavoriteBorder, MdFavorite } from 'react-icons/md';
+import { BsBookmarks, BsPlayFill } from 'react-icons/bs';
+import { MdFavorite } from 'react-icons/md';
 
 const SingleMovie = () => {
   const dispatch = useDispatch();

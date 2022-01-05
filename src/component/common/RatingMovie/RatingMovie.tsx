@@ -4,13 +4,14 @@ import RatingAPILayer from 'react-rating';
 interface Props{
   vote_average: number;
   vote_count: number
+  size?: {w:string, h:string}
 }
-const RatingMovie:React.FC<Props> = ({ vote_average, vote_count }) => (
+const RatingMovie:React.FC<Props> = ({ vote_average, vote_count, size = { w: 'w-7', h: 'h-7' } }) => (
   <div className="flex items-center gap-1">
     <RatingAPILayer
       placeholderRating={vote_average / 2}
-      emptySymbol={<BsStar className="w-7 h-7" />}
-      placeholderSymbol={<BsStarFill className="w-7 h-7 text-yellow-main" />}
+      emptySymbol={<BsStar className={`${size.w} ${size.h}`} />}
+      placeholderSymbol={<BsStarFill className={`${size.w} ${size.h} text-yellow-main`} />}
       readonly
     />
     <div>
