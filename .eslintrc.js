@@ -42,5 +42,7 @@ module.exports = {
     'jsx-a11y/no-noninteractive-element-interactions': 'off',
     'react/prop-types': 'off',
     'jsx-a11y/alt-text': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'react/destructuring-assignment': 'off',
   },
 };
