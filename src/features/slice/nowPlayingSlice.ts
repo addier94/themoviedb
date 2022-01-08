@@ -4,6 +4,8 @@ import {
   BillboardResponse, Movie, MovieState,
 } from 'types';
 import { allEndpointForMovieDetail, ExternalIDS } from 'types/SingleMovie';
+import { APIKey } from 'utils/movieApiKey';
+import movieApi from '../../utils/baseApi';
 
 export const movieFetchData = createAsyncThunk(
   'movies/nowPlayingsFetch',
@@ -33,6 +35,7 @@ const initialDetailMovie = {
 
 const initialState: MovieState = {
   data: {} as BillboardResponse,
+  popularMovies: {} as BillboardResponse,
   loading: false,
   movies: [],
   latestDoc: '',
@@ -50,6 +53,7 @@ const movieSlice = createSlice({
     },
 
   },
+
   extraReducers: (builder) => {
     builder
       .addCase(movieFetchData.pending, (state) => {

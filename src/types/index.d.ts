@@ -1,7 +1,17 @@
-import { allEndpointForMovieDetail, ExternalIDS } from './SingleMovie';
+import { allEndpointForMovieDetail } from './SingleMovie';
+
+export interface Popular extends stateMovie {
+  popularMovie: BillboardResponse;
+}
+export interface stateMovie {
+  loading: boolean;
+  latestDoc: Movie | string;
+  stop: number
+}
 
 export interface MovieState {
-  data: BillboardResponse
+  data: BillboardResponse;
+  popularMovies: BillboardResponse;
   loading: boolean;
   latestDoc: Movie | string;
   movies: Movie[];
@@ -10,7 +20,7 @@ export interface MovieState {
   selectMovie: allEndpointForMovieDetail
 }
 export interface BillboardResponse {
-  dates: Dates;
+  dates?: Dates;
   page: number;
   results: Movie[];
   total_pages: number;
