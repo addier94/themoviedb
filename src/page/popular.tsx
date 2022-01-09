@@ -37,7 +37,6 @@ const Popular = () => {
   useEffect(() => {
     let numPage: number = 1;
     numPage = (page < total_pages) ? page + 1 : page;
-
     const payload = { page: numPage, latestDoc };
     dispatch(getPopularMovie(payload));
   }, [dispatch, latestDoc]);
@@ -57,7 +56,7 @@ const Popular = () => {
           onClick={handleLoadMore}
           ref={loadRef}
         >
-          LOad more
+          Load more
         </button>
       </div>
     </>

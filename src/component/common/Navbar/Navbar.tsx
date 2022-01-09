@@ -38,7 +38,7 @@ const Navbar = () => {
             <li className=" nav__listitem">
               Home
               <ul className="nav__listitemdrop">
-                <li><Link to="/top-related">Top Related</Link></li>
+                <li><Link to="/top-rated">Top Related</Link></li>
                 <li><Link to="/popular">Popular</Link></li>
                 <li><Link to="/upcoming">Upcoming</Link></li>
               </ul>

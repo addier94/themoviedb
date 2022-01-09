@@ -2,11 +2,13 @@ import { configureStore } from '@reduxjs/toolkit';
 import nowPlayingSlice from './slice/nowPlayingSlice';
 import Ui from './slice/Ui';
 import popular from './slice/popularSlice';
+import topRated from './slice/topRatedSlice';
 
 export const store = configureStore({
   reducer: {
     movie: nowPlayingSlice,
     popular,
+    topRated,
     ui: Ui,
   },
 });

@@ -37,7 +37,7 @@ const AppRouter = () => (
       />
 
       <Route
-        path="/top-related"
+        path="/top-rated"
         element={(
           <MainLayout>
             <TopRated />

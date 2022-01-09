@@ -1,5 +1,8 @@
 import { allEndpointForMovieDetail } from './SingleMovie';
 
+export interface TopRelated extends stateMovie {
+  topRated: BillboardResponse
+}
 export interface Popular extends stateMovie {
   popularMovie: BillboardResponse;
 }
