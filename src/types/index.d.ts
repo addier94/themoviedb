@@ -1,5 +1,8 @@
-import { allEndpointForMovieDetail } from './SingleMovie';
+// import { allEndpointForMovieDetail } from './SingleMovie';
 
+export interface NowPlaying extends stateMovie {
+  nowPlaying: BillboardResponse
+}
 export interface TopRelated extends stateMovie {
   topRated: BillboardResponse
 }
@@ -20,7 +23,7 @@ export interface MovieState {
   movies: Movie[];
   stop: number;
   tag: string;
-  selectMovie: allEndpointForMovieDetail
+  // selectMovie: allEndpointForMovieDetail
 }
 export interface BillboardResponse {
   dates?: Dates;

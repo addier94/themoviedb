@@ -13,7 +13,7 @@ const SingleMovie = () => {
   const dispatch = useDispatch();
 
   const { toggleModal } = appSelector((state) => state.ui);
-  const { detail, credit, videos } = appSelector((state) => state.movie.selectMovie);
+  const { detail, credit, videos } = appSelector((state) => state.selectMovie.allEndpointsInit);
 
   const {
     poster_path, title, release_date, genres, runtime, overview, vote_average, vote_count,

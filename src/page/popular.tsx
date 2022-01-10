@@ -1,4 +1,4 @@
-import { MovieItem, MovieStateTitle } from 'component/common';
+import { BigLoading, MovieItem, MovieStateTitle } from 'component/common';
 import { appSelector } from 'features/hooks';
 import { getPopularMovie, paginate } from 'features/slice/popularSlice';
 import { useCallback, useEffect, useRef } from 'react';
@@ -43,6 +43,7 @@ const Popular = () => {
 
   return (
     <>
+      {loading && <BigLoading />}
       <MovieStateTitle title="List of Popular Movies" />
       <div className="flex flex-wrap items-start">
         {results && results.map((item) => (

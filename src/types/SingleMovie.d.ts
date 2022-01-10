@@ -1,4 +1,4 @@
-export interface allEndpointForMovieDetail {
+export interface MovieDetail {
   detail: SingleMovie;
   credit: Credits;
   external_ids: ExternalIDS,

@@ -3,12 +3,14 @@ import nowPlayingSlice from './slice/nowPlayingSlice';
 import Ui from './slice/Ui';
 import popular from './slice/popularSlice';
 import topRated from './slice/topRatedSlice';
+import selectMovie from './slice/selectMovieSlice';
 
 export const store = configureStore({
   reducer: {
-    movie: nowPlayingSlice,
+    nowPlaying: nowPlayingSlice,
     popular,
     topRated,
+    selectMovie,
     ui: Ui,
   },
 });

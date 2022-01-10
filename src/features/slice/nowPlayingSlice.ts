@@ -1,86 +1,54 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getNowPlayings, getSingleMovieDetail } from 'action/nowPlayingAction';
+import { fetchNowPlayingMovies } from 'action/nowPlayingAction';
 import {
-  BillboardResponse, Movie, MovieState,
+  BillboardResponse, Movie, NowPlaying,
 } from 'types';
-import { allEndpointForMovieDetail, ExternalIDS } from 'types/SingleMovie';
-import { APIKey } from 'utils/movieApiKey';
-import movieApi from '../../utils/baseApi';
 
-export const movieFetchData = createAsyncThunk(
-  'movies/nowPlayingsFetch',
-  async (payload: {page:number, doc:Movie|string, tag:string}) => {
-    const { page, doc, tag } = payload;
-    const resp = await getNowPlayings(page, tag) as BillboardResponse;
+interface FetchNowPlayingParams {
+  page: number,
+  latestDoc: Movie|string
+}
 
-    return { resp, doc, tag };
+export const fetchNowPlaying = createAsyncThunk(
+  'movies/fetchNowPlaying',
+  async (payload:FetchNowPlayingParams) => {
+    const { page, latestDoc } = payload;
+    const data = await fetchNowPlayingMovies(page) as BillboardResponse;
+    return { popularMovie: data, latestDoc, page };
   },
 );
 
-export const fetchAsyncMovieDetail = createAsyncThunk(
-  'movies/fetchAsyncMovieDetail',
-  async (id: string) => {
-    const res = await getSingleMovieDetail(id) as allEndpointForMovieDetail;
-    return res;
-  },
-);
-const initialDetailMovie = {
-  detail: {},
-  credit: {},
-  external_ids: {},
-  reviews: {},
-  videos: {},
-  recommendations: {},
-};
-
-const initialState: MovieState = {
-  data: {} as BillboardResponse,
-  popularMovies: {} as BillboardResponse,
+const initialState:NowPlaying = {
+  nowPlaying: {} as BillboardResponse,
   loading: false,
-  movies: [],
   latestDoc: '',
   stop: 0,
-  tag: 'now_playing',
-  selectMovie: initialDetailMovie as allEndpointForMovieDetail,
 };
 
-const movieSlice = createSlice({
-  name: 'movies',
+const popularSlice = createSlice({
+  name: 'popular',
   initialState,
   reducers: {
     paginate: (state, action) => {
       state.latestDoc = action.payload.latestDoc;
     },
-
   },
-
   extraReducers: (builder) => {
     builder
-      .addCase(movieFetchData.pending, (state) => {
+      .addCase(fetchNowPlaying.pending, (state) => {
         state.loading = true;
       })
-      .addCase(movieFetchData.fulfilled, (state, action) => {
-        if (state.tag === action.payload.tag) {
-          state.data = action.payload.resp;
-          state.movies = [...state.movies, ...action.payload.resp.results];
+      .addCase(fetchNowPlaying.fulfilled, (state, action) => {
+        if (action.payload.latestDoc) {
+          state.nowPlaying.results = [...state.nowPlaying.results, ...action.payload.popularMovie.results];
         } else {
-          state.data = action.payload.resp;
-          state.movies = action.payload.resp.results;
-          state.tag = action.payload.tag;
-          state.stop = 0;
+          state.nowPlaying = action.payload.popularMovie;
         }
-        state.stop = action.payload.resp.results.length;
-        state.loading = false;
-      })
-      .addCase(fetchAsyncMovieDetail.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(fetchAsyncMovieDetail.fulfilled, (state, action) => {
-        state.selectMovie = action.payload;
+        state.nowPlaying.page = action.payload.page;
+        state.stop = action.payload.popularMovie.results.length;
         state.loading = false;
       });
   },
 });
-
-export const { paginate } = movieSlice.actions;
-export default movieSlice.reducer;
+export const { paginate } = popularSlice.actions;
+export default popularSlice.reducer;

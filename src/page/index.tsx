@@ -1,29 +1,65 @@
-import { MovieStateTitle } from 'component/common';
-import Movies from 'component/home/Movies';
+import { BigLoading, MovieItem, MovieStateTitle } from 'component/common';
 import { appSelector } from 'features/hooks';
-import { movieFetchData } from 'features/slice/nowPlayingSlice';
-import { useEffect } from 'react';
+import { fetchNowPlaying, paginate } from 'features/slice/nowPlayingSlice';
+import { useCallback, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
+import { latestDoc as doc } from '../action/nowPlayingAction';
 
 const Home = () => {
-  const movie = appSelector((state) => state.movie);
-  const { data: { page, total_pages }, latestDoc, tag } = movie;
+  const {
+    latestDoc, loading, stop, nowPlaying,
+  } = appSelector((state) => state.nowPlaying);
+  const { page = 1, total_pages, results } = nowPlaying;
 
   const dispatch = useDispatch();
+  const loadRef = useRef(null);
+
+  const handleLoadMore = useCallback(() => {
+    if (stop === 0) return;
+    dispatch(paginate({ latestDoc: doc }));
+  }, [stop, dispatch]);
+
+  useEffect(() => {
+    const btn = loadRef.current;
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        handleLoadMore();
+      }
+    });
+
+    if (btn) observer.observe(btn);
+
+    return () => {
+      if (btn) observer.unobserve(btn);
+    };
+  }, [handleLoadMore]);
 
   useEffect(() => {
     let numPage: number = 1;
-    if (tag === 'no_playing') {
-      numPage = (page < total_pages) ? page + 1 : page;
-    }
-    const payload = { page: numPage, doc: latestDoc, tag: 'now_playing' };
-    dispatch(movieFetchData(payload));
-  }, [latestDoc]);
+    numPage = (page < total_pages) ? page + 1 : page;
+    const payload = { page: numPage, latestDoc };
+    dispatch(fetchNowPlaying(payload));
+  }, [dispatch, latestDoc]);
 
   return (
     <>
-      <MovieStateTitle title="Now playing" />
-      <Movies />
+      {loading && <BigLoading />}
+      <MovieStateTitle title="Movies Now Playing" />
+      <div className="flex flex-wrap items-start">
+        {results && results.map((item) => (
+          <MovieItem key={item.id} movie={item} />
+        ))}
+
+        {/* Load more button */}
+        <button
+          type="button"
+          className={`px-6 py-2 opacity-0 ${stop === 0 && 'hidden'}`}
+          onClick={handleLoadMore}
+          ref={loadRef}
+        >
+          Load more
+        </button>
+      </div>
     </>
   );
 };

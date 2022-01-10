@@ -28,7 +28,7 @@ const Navbar = () => {
     return () => wind.removeEventListener('scroll', onScroll);
   }, [refNav.current]);
   return (
-    <header ref={refNav} className="bg-gray2-main text-white p-4 lg:p-2 fixed top-0 w-full h-28 lg:h-16 duration-200">
+    <header ref={refNav} className="bg-gray2-main text-white p-4 lg:p-2 fixed z-50 top-0 w-full h-28 lg:h-16 duration-200">
       <div className="lg:flex items-center justify-between max-w-screen-2xl mx-auto">
         <nav className="flex justify-between items-center">
           <GoThreeBars className="w-6 h-6 lg:hidden" />
