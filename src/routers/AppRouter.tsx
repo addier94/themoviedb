@@ -2,12 +2,15 @@ import { MainLayout } from 'Layouts';
 import Home from 'page';
 import Upcoming from 'page/upcoming';
 import Popular from 'page/popular';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import {
+  Routes, Route, BrowserRouter, HashRouter,
+} from 'react-router-dom';
 import TopRated from 'page/TopRated';
 import MovieById from 'page/movie/MovieById';
 
 const AppRouter = () => (
-  <BrowserRouter>
+  <HashRouter>
+    {/* <BrowserRouter> */}
     <Routes>
 
       <Route
@@ -56,7 +59,8 @@ const AppRouter = () => (
 
     </Routes>
 
-  </BrowserRouter>
+    {/* </BrowserRouter> */}
+  </HashRouter>
 );
 
 export default AppRouter;
