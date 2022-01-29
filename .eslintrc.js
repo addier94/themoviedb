@@ -44,5 +44,6 @@ module.exports = {
     'jsx-a11y/alt-text': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/destructuring-assignment': 'off',
+    'jsx-a11y/label-has-associated-control': 'off',
   },
 };
