@@ -1,3 +1,4 @@
 export interface TUi {
-  toggleModal: boolean
+  stateModal: boolean,
+  authModal: boolean
 }

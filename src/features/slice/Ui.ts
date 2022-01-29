@@ -2,20 +2,29 @@ import { createSlice } from '@reduxjs/toolkit';
 import { TUi } from 'types/UiType';
 
 const initialState: TUi = {
-  toggleModal: false,
+  stateModal: false,
+  authModal: false,
 };
 const uiState = createSlice({
   name: 'uiState',
   initialState,
   reducers: {
     showModal: (state) => {
-      state.toggleModal = true;
+      state.stateModal = true;
     },
     hideModal: (state) => {
-      state.toggleModal = false;
+      state.stateModal = false;
+    },
+    showAuthModal: (state) => {
+      state.authModal = true;
+    },
+    hideAuthModal: (state) => {
+      state.authModal = false;
     },
   },
 });
 
-export const { showModal, hideModal } = uiState.actions;
+export const {
+  showModal, hideModal, showAuthModal, hideAuthModal,
+} = uiState.actions;
 export default uiState.reducer;

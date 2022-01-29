@@ -1,4 +1,4 @@
-import { Modal, RatingMovie } from 'component/common';
+import { RatingMovie, VideoTrailer } from 'component/common';
 import { appSelector } from 'features/hooks';
 import { showModal } from 'features/slice/Ui';
 import { useEffect, useState } from 'react';
@@ -8,11 +8,11 @@ import { ResultVideos } from 'types/SingleMovie';
 import { DEFAULT_IMAGE, PATH_IMAGE } from 'utils/imagePath';
 import { BsBookmarks, BsPlayFill } from 'react-icons/bs';
 import { MdFavorite } from 'react-icons/md';
+import { VideoModal } from 'component/common/Modal';
 
 const SingleMovie = () => {
   const dispatch = useDispatch();
 
-  const { toggleModal } = appSelector((state) => state.ui);
   const { detail, credit, videos } = appSelector((state) => state.selectMovie.allEndpointsInit);
 
   const {
@@ -71,8 +71,9 @@ const SingleMovie = () => {
           </div>
           <RatingMovie vote_average={vote_average} vote_count={vote_count} />
         </article>
-        <div />
-        {toggleModal && <Modal video={video} />}
+        <VideoModal>
+          <VideoTrailer video={video} />
+        </VideoModal>
         <div>
           <h6 className="text-2xl">Overview</h6>
           <p className="font-light">{overview}</p>

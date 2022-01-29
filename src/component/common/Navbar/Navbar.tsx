@@ -5,10 +5,15 @@ import { GrFormSearch } from 'react-icons/gr';
 import { useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
+import { Auth } from 'component/Auth';
+import { showAuthModal, showModal } from 'features/slice/Ui';
+import { useDispatch } from 'react-redux';
+import { AuthModal } from 'component/common/Modal';
 
 const Navbar = () => {
   const navigate = useNavigate();
   const refNav = useRef<HTMLHeadingElement>(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     let lastScrollTop = 0;
@@ -59,10 +64,13 @@ const Navbar = () => {
             <GrFormSearch className="w-6 h-6" />
             <input className="w-full outline-none text-black" type="text" placeholder="Enter keywords" />
           </form>
-          <a href="/" className="hidden lg:flex ml-5 items-center">
+          <button type="button" className="hidden lg:flex ml-5 items-center" onClick={() => dispatch(showAuthModal())}>
             <FaRegUser className="mr-2" />
             Login
-          </a>
+          </button>
+          <AuthModal>
+            <Auth />
+          </AuthModal>
         </article>
       </div>
     </header>
