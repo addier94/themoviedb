@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { TUi } from 'types/UiType';
+import { authModalViewT, TUi } from 'types/UiType';
 
 const initialState: TUi = {
   stateModal: false,
   authModal: false,
+  authModalView: authModalViewT.LOGIN_VIEW,
 };
 const uiState = createSlice({
   name: 'uiState',
@@ -21,10 +22,13 @@ const uiState = createSlice({
     hideAuthModal: (state) => {
       state.authModal = false;
     },
+    setAuthModalView: (state, action) => {
+      state.authModalView = action.payload;
+    },
   },
 });
 
 export const {
-  showModal, hideModal, showAuthModal, hideAuthModal,
+  showModal, hideModal, showAuthModal, hideAuthModal, setAuthModalView,
 } = uiState.actions;
 export default uiState.reducer;

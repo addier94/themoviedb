@@ -1,26 +1,28 @@
+import { setAuthModalView } from 'features/slice/Ui';
 import { FaUserCircle } from 'react-icons/fa';
 import { FiUsers } from 'react-icons/fi';
+import { useDispatch } from 'react-redux';
+import { authModalViewT } from 'types/UiType';
+import './LoginView.css';
 
-const LoginForm = () => {
-  const resetPassword = () => {
-
-  };
+const LoginView = () => {
+  const dispatch = useDispatch();
   return (
-    <form className="bg-gray3-main max-w-sm w-full px-8 h-[410px]">
+    <form className="LoginView bg-gray3-main max-w-sm w-full px-8 h-[410px] m-auto">
       <h6 className="bg-yellow-main flex justify-center relative mb-16">
         <span className="absolute bg-yellow-main px-12 py-3 -mt-[8px] rounded-sm">SIGN IN</span>
       </h6>
       <FaUserCircle className="w-24 h-24 mx-auto mb-8" />
       <div className="mb-4">
-        <input type="email" name="email" className="peer mt-1 px-3 py-[10px] bg-white text-black border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-yellow-400 focus:ring-yellow-500 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="you@example.com" />
+        <input type="email" name="email" className="auth__input" placeholder="you@example.com" />
       </div>
 
       <div>
-        <input type="password" name="password" className="peer mt-1 px-3 py-[10px] bg-white text-black border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-yellow-400 focus:ring-yellow-500 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="you@example.com" />
+        <input type="password" name="password" className="auth__input" placeholder="Enter your password" />
       </div>
 
       <div className="flex text-yellow-main justify-between mb-5 text-sm mt-2">
-        <button className="duration-150 hover:opacity-70" type="button">
+        <button onClick={() => dispatch(setAuthModalView(authModalViewT.SIGNUP_VIEW))} className="duration-150 hover:opacity-70" type="button">
           <FiUsers className="inline-block mr-1" />
           Register
         </button>
@@ -31,4 +33,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default LoginView;

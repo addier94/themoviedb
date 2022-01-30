@@ -5,10 +5,8 @@ import { GrFormSearch } from 'react-icons/gr';
 import { useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
-import { Auth } from 'component/Auth';
-import { showAuthModal, showModal } from 'features/slice/Ui';
+import { showAuthModal } from 'features/slice/Ui';
 import { useDispatch } from 'react-redux';
-import { AuthModal } from 'component/common/Modal';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -68,9 +66,7 @@ const Navbar = () => {
             <FaRegUser className="mr-2" />
             Login
           </button>
-          <AuthModal>
-            <Auth />
-          </AuthModal>
+
         </article>
       </div>
     </header>
