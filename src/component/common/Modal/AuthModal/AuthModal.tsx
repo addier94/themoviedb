@@ -32,7 +32,7 @@ const AuthModal:React.FC<Props> = ({ children }) => {
   return (
     authModal
       ? (
-        <div ref={ref} className="bg-opacity8-main p-4 fixed top-0 left-0 w-full z-50 h-screen overflow-y-scroll flex">
+        <div ref={ref} className="bg-opacity8-main p-4 fixed top-0 left-0 w-full z-40 h-screen overflow-y-scroll flex">
           <VscChromeClose className="w-6 h-6 absolute top-2 right-2 bg-red-700 rounded-full p-px  cursor-pointer" onClick={() => dispatch(hideAuthModal())} />
           {children}
         </div>

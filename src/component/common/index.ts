@@ -6,3 +6,4 @@ export { default as BigLoading } from './BigLoading';
 export { default as Modal } from './Modal/VideoModal';
 export { default as RatingMovie } from './RatingMovie';
 export { default as VideoTrailer } from './VideoTrailer';
+export { default as Errors } from './Errors';

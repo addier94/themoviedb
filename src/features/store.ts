@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import nowPlayingSlice from './slice/nowPlayingSlice';
 import Ui from './slice/Ui';
+import auth from './slice/authSlice';
 import popular from './slice/popularSlice';
 import topRated from './slice/topRatedSlice';
 import selectMovie from './slice/selectMovieSlice';
@@ -12,6 +13,7 @@ export const store = configureStore({
     topRated,
     selectMovie,
     ui: Ui,
+    auth,
   },
 });
 

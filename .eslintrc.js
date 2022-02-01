@@ -45,5 +45,7 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'react/destructuring-assignment': 'off',
     'jsx-a11y/label-has-associated-control': 'off',
+    'no-return-await': 'off',
+    'jsx-a11y/anchor-is-valid': 'warn',
   },
 };

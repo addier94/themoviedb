@@ -31,7 +31,7 @@ const Navbar = () => {
     return () => wind.removeEventListener('scroll', onScroll);
   }, [refNav.current]);
   return (
-    <header ref={refNav} className="bg-gray2-main text-white p-4 lg:p-2 fixed z-50 top-0 w-full h-28 lg:h-16 duration-200">
+    <header ref={refNav} className="bg-gray2-main text-white p-4 lg:p-2 fixed z-40 top-0 w-full h-28 lg:h-16 duration-200">
       <div className="lg:flex items-center justify-between max-w-screen-2xl mx-auto">
         <nav className="flex justify-between items-center">
           <GoThreeBars className="w-6 h-6 lg:hidden" />
@@ -53,8 +53,8 @@ const Navbar = () => {
                 <li>Portfolio</li>
               </ul>
             </li>
-            <li className="nav__listitem"><a href="/">Country</a></li>
-            <li className="nav__listitem"><a href="/">Movies</a></li>
+            <li className="nav__listitem"><a href="#">Country</a></li>
+            <li className="nav__listitem"><a href="#">Movies</a></li>
           </ul>
         </nav>
         <article className="lg:flex items-center ">
