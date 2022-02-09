@@ -1,4 +1,6 @@
-import { LoginView, RegisterView } from 'component/Auth';
+import {
+  EmailVerification, ForgotPasswordView, LoginView, RegisterView,
+} from 'component/Auth';
 import { Footer, Navbar } from 'component/common';
 import { AuthModal } from 'component/common/Modal';
 import { appSelector } from 'features/hooks';
@@ -13,6 +15,8 @@ const ModalView: React.FC<{authModalView: string}> = ({ authModalView }) => (
   <AuthModal>
     {authModalView === authModalViewT.LOGIN_VIEW && <LoginView />}
     {authModalView === authModalViewT.SIGNUP_VIEW && <RegisterView />}
+    {authModalView === authModalViewT.FORGOT_PASSWORD_VIEW && <ForgotPasswordView />}
+    {authModalView === authModalViewT.EMAIL_VERIFICATION_VIEW && <EmailVerification />}
   </AuthModal>
 );
 

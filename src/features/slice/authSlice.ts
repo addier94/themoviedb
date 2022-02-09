@@ -1,10 +1,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { registerApi } from 'action/authAction';
-import { authState, IRegister } from 'types/auth';
+import { loginApi, registerApi } from 'action/authAction';
+import { authState, ILogin, IRegister } from 'types/auth';
 
 export const authRegister = createAsyncThunk(
   'auth/register',
   async (user: IRegister) => await registerApi(user),
+);
+
+export const authLogin = createAsyncThunk(
+  'auth/login',
+  async (user: ILogin) => await loginApi(user),
 );
 
 const initialState: authState = {
@@ -16,7 +21,9 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-
+    addUser: (state, action) => {
+      state.currentUser = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -30,5 +37,7 @@ const authSlice = createSlice({
       );
   },
 });
+
+export const { addUser } = authSlice.actions;
 
 export default authSlice.reducer;

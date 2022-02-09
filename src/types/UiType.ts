@@ -5,12 +5,14 @@ export interface TUi {
 }
 
 interface authModalView {
-  FORGOT_VIEW: string,
+  FORGOT_PASSWORD_VIEW: string,
   SIGNUP_VIEW: string,
-  LOGIN_VIEW: string
+  LOGIN_VIEW: string,
+  EMAIL_VERIFICATION_VIEW: string,
 }
 export const authModalViewT: authModalView = {
-  FORGOT_VIEW: 'FORGOT_VIEW',
+  FORGOT_PASSWORD_VIEW: 'FORGOT_PASSWORD_VIEW',
   SIGNUP_VIEW: 'SIGNUP_VIEW',
   LOGIN_VIEW: 'LOGIN_VIEW',
+  EMAIL_VERIFICATION_VIEW: 'EMAIL_VERIFICATION_VIEW',
 };

@@ -13,3 +13,8 @@ export interface authState {
 }
 
 export interface IAuth extends FireAuth.user {}
+
+export interface ILogin {
+  email: string,
+  password: string
+}

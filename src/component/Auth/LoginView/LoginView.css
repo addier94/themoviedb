@@ -1,3 +1,3 @@
 .LoginView .auth__input{
-  @apply mt-1 px-3 py-[10px] bg-white text-black border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-yellow-400 focus:ring-yellow-500 block w-full rounded-md sm:text-sm focus:ring-1;
+  @apply px-3 py-[10px] bg-white text-black border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-yellow-400 focus:ring-yellow-500 block w-full rounded-md sm:text-sm focus:ring-1;
 }

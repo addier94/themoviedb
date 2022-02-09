@@ -1,7 +1,9 @@
 import { auth } from 'Firebase';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile,
+} from 'firebase/auth';
 import { toast } from 'react-toastify';
-import { IRegister } from 'types/auth';
+import { ILogin, IRegister } from 'types/auth';
 
 export const registerApi = async (user: IRegister) => {
   try {
@@ -11,6 +13,16 @@ export const registerApi = async (user: IRegister) => {
     });
 
     return user.name;
+  } catch (error:any) {
+    return toast.error(error.message);
+  }
+};
+
+export const loginApi = async (user: ILogin) => {
+  try {
+    const { email, password } = user;
+    const res = await signInWithEmailAndPassword(auth, email, password);
+    return res.user;
   } catch (error:any) {
     return toast.error(error.message);
   }

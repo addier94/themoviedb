@@ -50,19 +50,18 @@ const RegisterView = () => {
       </div>
 
       <div>
-        <input type="cf_password" name="cf_password" className="auth__input" placeholder="Confirm your password" value={cf_password} onChange={(e) => setCfPassword(e.target.value)} />
+        <input type="password" name="cf_password" className="auth__input" placeholder="Confirm your password" value={cf_password} onChange={(e) => setCfPassword(e.target.value)} />
       </div>
 
       <div className="flex text-yellow-main justify-between mb-5 text-sm mt-2">
-        <button onClick={() => dispatch(setAuthModalView(authModalViewT.LOGIN_VIEW))} className="duration-150 hover:opacity-70" type="button">
+        <button onClick={() => dispatch(setAuthModalView(authModalViewT.LOGIN_VIEW))} className="duration-150 hover:opacity-70 cursor-pointer" type="button">
           <FiUsers className="inline-block mr-1" />
           Login
         </button>
-        <button className="duration-150 hover:opacity-70" type="button">Forgot Password</button>
+
       </div>
       <button type="submit" disabled={loading} className="bg-yellow-main font-bold w-full py-[10px] duration-150 rounded-md hover:opacity-70 btn__disabled">
-        {loading && <CgSpinner className="animate-spin w-7 h-7 inline-block align-bottom" />}
-        Register
+        {loading ? <CgSpinner className="animate-spin w-6 h-6 inline-block align-bottom" /> : 'Register'}
       </button>
     </form>
   );

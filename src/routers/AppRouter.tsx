@@ -7,10 +7,14 @@ import {
 } from 'react-router-dom';
 import TopRated from 'page/TopRated';
 import MovieById from 'page/movie/MovieById';
+import App from 'App';
 
 const AppRouter = () => (
   <HashRouter>
     {/* <BrowserRouter> */}
+
+    <App />
+
     <Routes>
 
       <Route
