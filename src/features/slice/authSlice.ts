@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { loginApi, registerApi } from 'action/authAction';
+import { forgotPassApi, loginApi, registerApi } from 'action/authAction';
 import { authState, ILogin, IRegister } from 'types/auth';
 
 export const authRegister = createAsyncThunk(
@@ -10,6 +10,11 @@ export const authRegister = createAsyncThunk(
 export const authLogin = createAsyncThunk(
   'auth/login',
   async (user: ILogin) => await loginApi(user),
+);
+
+export const authForgotPassword = createAsyncThunk(
+  'auth/forgot_password',
+  async (email:string) => await forgotPassApi(email),
 );
 
 const initialState: authState = {

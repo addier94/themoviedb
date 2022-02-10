@@ -1,6 +1,6 @@
 import { auth } from 'Firebase';
 import {
-  createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile,
+  createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, updateProfile,
 } from 'firebase/auth';
 import { toast } from 'react-toastify';
 import { ILogin, IRegister } from 'types/auth';
@@ -25,5 +25,14 @@ export const loginApi = async (user: ILogin) => {
     return res.user;
   } catch (error:any) {
     return toast.error(error.message);
+  }
+};
+
+export const forgotPassApi = async (email:string) => {
+  try {
+    await sendPasswordResetEmail(auth, email);
+    return toast.success('Success! Check your email');
+  } catch (error:any) {
+    toast.error(error.message);
   }
 };

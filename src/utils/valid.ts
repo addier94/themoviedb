@@ -40,3 +40,18 @@ export const checkPassword = (password: string, cf_password: string) => {
     return ('Confirm password did not match.');
   }
 };
+
+// validate forgotPassword email
+export const validateOnlyEmail = (email: string) => {
+  const errors: string[] = [];
+  if (!email.trim()) {
+    errors.push('Please add email.');
+  } else if (!validateEmail(email)) {
+    errors.push('Email format is incorrect.');
+  }
+
+  return {
+    errMsg: errors,
+    errLength: errors.length,
+  };
+};

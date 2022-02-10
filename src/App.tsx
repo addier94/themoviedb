@@ -1,4 +1,3 @@
-import AppRouter from 'routers/AppRouter';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { appDispatch, appSelector } from 'features/hooks';
