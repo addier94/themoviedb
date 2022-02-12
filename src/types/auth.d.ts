@@ -12,7 +12,7 @@ export interface authState {
   loading: boolean
 }
 
-export interface IAuth extends FireAuth.user {}
+export interface IAuth extends FireAuth.User {}
 
 export interface ILogin {
   email: string,

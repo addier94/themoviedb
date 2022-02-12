@@ -47,5 +47,7 @@ module.exports = {
     'jsx-a11y/label-has-associated-control': 'off',
     'no-return-await': 'off',
     'jsx-a11y/anchor-is-valid': 'warn',
+    'import/no-extraneous-dependencies': 'off',
+    'global-require': 'off',
   },
 };

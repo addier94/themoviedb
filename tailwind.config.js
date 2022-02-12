@@ -29,7 +29,6 @@ module.exports = {
         'light-main': 'var(--light)',
         'dark-main': 'var(--dark)',
         'opacity8-main': 'var(--opacity8)',
-
       },
     },
   },

@@ -1,19 +1,17 @@
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { appDispatch, appSelector } from 'features/hooks';
-import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { onIdTokenChanged, sendEmailVerification, signOut } from 'firebase/auth';
 import { addUser } from 'features/slice/authSlice';
 import { auth } from 'Firebase';
-import { hideAuthModal, hideModal, setAuthModalView } from 'features/slice/Ui';
+import { hideAuthModal, setAuthModalView } from 'features/slice/Ui';
 import { authModalViewT } from 'types/UiType';
 
 function App() {
   const { currentUser } = appSelector((state) => state.auth);
   // const { sort, doc } = appSelector((state) => state.);
   const dispatch = appDispatch();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = onIdTokenChanged(auth, async (user) => {
@@ -22,19 +20,19 @@ function App() {
           (p) => p.providerId === 'password',
         );
         if (providerId && !user.emailVerified) {
-          toast.error('Please check your email to activate your account');
           await sendEmailVerification(user);
           await signOut(auth);
-          return dispatch(setAuthModalView(authModalViewT.EMAIL_VERIFICATION_VIEW));
+          dispatch(setAuthModalView(authModalViewT.EMAIL_VERIFICATION_VIEW));
+          return toast.error('Please check your email to activate your account');
         }
         dispatch(addUser(user));
         dispatch(hideAuthModal());
+        toast.success('Login success');
       } else {
         dispatch(addUser(undefined));
-        // return navigate('/login');
+        return toast.error('Password or email wrong');
       }
     });
-
     return unsubscribe;
   }, [dispatch]);
 
